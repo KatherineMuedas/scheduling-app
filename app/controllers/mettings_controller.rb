@@ -1,0 +1,2 @@
+class MettingsController < ApplicationController
+end
