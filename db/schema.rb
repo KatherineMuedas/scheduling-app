@@ -26,14 +26,16 @@ ActiveRecord::Schema.define(version: 2019_03_27_145548) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
-  create_table "mettings", force: :cascade do |t|
+  create_table "meetings", force: :cascade do |t|
     t.string "name"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.string "slug", null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_mettings_on_user_id"
+    t.index ["slug"], name: "index_meetings_on_slug", unique: true
+    t.index ["user_id"], name: "index_meetings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -53,5 +55,5 @@ ActiveRecord::Schema.define(version: 2019_03_27_145548) do
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
-  add_foreign_key "mettings", "users"
+  add_foreign_key "meetings", "users"
 end
